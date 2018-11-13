@@ -1,29 +1,27 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
-  name: elasticsearch-data
+  name: elasticsearch-discovery
   labels:
     app: elasticsearch
 spec:
-  serviceName: elasticsearch-data
-  replicas: 5
+  replicas: 1
   selector:
     matchLabels:
       app: elasticsearch
-      role: node
+      role: discovery
       tier: backend
   template:
     metadata:
       labels:
         app: elasticsearch
-        role: node
+        role: discovery
         tier: backend
     spec:
       containers:
-      - name: elastic
+      - name: elasticsearch-discovery
         image: ibivibiv/elasticsearch:2.4.6
-        imagePullPolicy: "Always"
+        imagePullPolicy: Always
         ports:
         - containerPort: 9200
         - containerPort: 9300
-      restartPolicy: Always
