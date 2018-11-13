@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: elasticsearch-discovery
-        image: ibivibiv/elasticsearch:2.4.6
+        image: <your elastic image here>
         imagePullPolicy: Always
         ports:
         - containerPort: 9200
