@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: elasticsearch-data
+  labels:
+    app: elasticsearch
+spec:
+  serviceName: elasticsearch-data
+  replicas: 5
+  selector:
+    matchLabels:
+      app: elasticsearch
+      role: node
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: elasticsearch
+        role: node
+        tier: backend
+    spec:
+      containers:
+      - name: elastic
+        image: ibivibiv/elasticsearch:2.4.6
+        imagePullPolicy: "Always"
+        ports:
+        - containerPort: 9200
+        - containerPort: 9300
+      restartPolicy: Always
